@@ -21,14 +21,14 @@ class Driver:
             self.sql.execute(query)
             return self.sql.fetchone()[0]
         except Exception as ex:
-            print('Ошибка БД:', ex, query)
+            print('Ошибка БД:', str(ex), query)
 
     def receives(self, query: str):
         try:
             self.sql.execute(query)
             return self.sql.fetchall()
         except Exception as ex:
-            print('Ошибка БД:', ex, query)
+            print('Ошибка БД:', str(ex), query)
 
     def save(self, q):
         try:
@@ -38,7 +38,7 @@ class Driver:
                 self.sql.execute(q)
             self.con.commit()
         except Exception as ex:
-            print('Запрос:', q)
+            print('Ошибка БД:', str(ex), q)
 
     def __del__(self):
         self.con.close()
