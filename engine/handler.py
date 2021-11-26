@@ -8,7 +8,6 @@ def handler():
     while True:
         try:
             for data in listen():
-                print(data)
                 response = data[0]
                 if 'query' in response and 'type' in response:
                     match response['type']:

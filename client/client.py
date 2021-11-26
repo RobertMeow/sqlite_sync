@@ -1,10 +1,10 @@
 import socket, json
 
 
-while True:
+def send(query, type):
     sock = socket.socket(socket.SOCK_DGRAM)
-    sock.connect(('127.0.0.1', 101))
-    sock.send(bytes(json.dumps({'query': "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name='users'", 'type': 'receive'}), encoding='UTF-8'))
+    sock.connect(('94.228.116.191', 101))
+    sock.send(bytes(json.dumps({'query': query, 'type': type}), encoding='UTF-8'))
     data = sock.recv(1024)
-    print(json.loads(data))
     sock.close()
+    return json.loads(data)
