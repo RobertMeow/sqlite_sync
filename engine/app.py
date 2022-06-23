@@ -12,6 +12,5 @@ def listen():  # {"query": ""}
     while True:
         conn, addr = sock.accept()
         data = conn.recv(16384*8)  # 16384
-        print(data)
         yield json.loads(data), conn
         conn.close()
