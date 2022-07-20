@@ -10,7 +10,7 @@ class Listen:
         sock.bind(config)
         sock.listen()
         while True:
-            data = ""
+            data = b""
             conn, addr = sock.accept()
             with conn:
                 while True:
