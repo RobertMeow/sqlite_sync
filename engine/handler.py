@@ -35,6 +35,7 @@ class HandlerDB(Driver, Listen):
                                 result = 'Неизвестный запрос!', None
                         data[1].send(bytes(json.dumps({'result': result[0], 'status': result[1]}), encoding='UTF-8'))
             except KeyboardInterrupt:
+                print('KeyboardInterrupt in handler')
                 break
             except:
                 traceback.print_exc()

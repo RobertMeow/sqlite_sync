@@ -8,14 +8,14 @@ class ErrorDB(Exception):
 
 
 class ClientDriver:
-    __slots__ = ['con', 'sql', 'port', 'ip', 'pid']
+    __slots__ = ['con', 'sql', 'config', 'pid']
 
     def __init__(self, handler):
-        self.ip, self.port = handler.config[0], handler.config[1]
+        self.config = handler.config
 
     def send(self, query: str, type_method: str):
         sock = socket.socket(socket.SOCK_DGRAM)
-        sock.connect((self.ip, self.port))
+        sock.connect(self.config)
         sock.send(bytes(json.dumps({'query': query, 'type': type_method}), encoding='UTF-8'))
         data = b""
         while True:
