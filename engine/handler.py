@@ -17,12 +17,15 @@ class HandlerDB(Driver, Listen):
         self.HD = Process(target=self.handler, name='HANDLER_DB')
         self.HD.start()
         time.sleep(0.1)
+        print('OK')
 
     def handler(self):
+        print('START HANDLER')
         while True:
             try:
                 for data in self.listen(self.config):
                     response = data[0]
+                    print(response)
                     if 'query' in response and 'type' in response:
                         match response['type']:
                             case 'save':
