@@ -10,14 +10,16 @@ class Listen:
         sock.bind(config)
         sock.listen()
         while True:
-            '''data = b""
+            data = ""
             conn, addr = sock.accept()
-            while True:
-                packet = conn.recv(32)
-                if not packet:
-                    break
-                data += packet'''
-            conn, addr = sock.accept()
-            data = conn.recv(16384)
+            with conn:
+                while True:
+                    packet = conn.recv(1024)
+                    if not packet:
+                        break
+                    data += packet
+
+            '''conn, addr = sock.accept()
+            data = conn.recv(16384)'''
             yield json.loads(data), conn
             conn.close()
