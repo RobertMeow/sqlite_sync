@@ -7,7 +7,7 @@ class Listen:
     def listen(config):
         sock = socket.socket(socket.SOCK_DGRAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        sock.bind((config['listen_ip'], config['port']))
+        sock.bind(config)
         sock.listen()
         while True:
             data = b""
