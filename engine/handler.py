@@ -11,7 +11,7 @@ from multiprocessing import Process
 class HandlerDB(Driver, Listen):
     __slots__ = ["HD"]
 
-    def __init__(self, warp_file=':memory:', config=("0.0.0.0", 1001)):
+    def __init__(self, warp_file=':memory:', config=("127.0.0.1", 10001)):
         super().__init__(warp_file)
         self.config = config
         self.HD = Process(target=self.handler, name='HANDLER_DB')
@@ -35,7 +35,6 @@ class HandlerDB(Driver, Listen):
                                 result = 'Неизвестный запрос!', None
                         data[1].send(bytes(json.dumps({'result': result[0], 'status': result[1]}), encoding='UTF-8'))
             except KeyboardInterrupt:
-                print('KeyboardInterrupt in handler')
                 break
             except:
                 traceback.print_exc()
