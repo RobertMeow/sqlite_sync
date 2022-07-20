@@ -11,7 +11,7 @@ from multiprocessing import Process
 class HandlerDB(Driver, Listen):
     __slots__ = ["HD"]
 
-    def __init__(self, warp_file=':memory:', config=("localhost", 1001)):
+    def __init__(self, warp_file=':memory:', config=("0.0.0.0", 1001)):
         super().__init__(warp_file)
         self.config = config
         self.HD = Process(target=self.handler, name='HANDLER_DB')
@@ -40,4 +40,5 @@ class HandlerDB(Driver, Listen):
                 traceback.print_exc()
 
     def __del__(self):
+        print('KILL HANDLER DB')
         self.HD.kill()
