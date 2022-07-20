@@ -1,4 +1,5 @@
 import json
+import time
 import traceback
 
 from .control_db import Driver
@@ -11,11 +12,11 @@ class HandlerDB(Driver, Listen):
     __slots__ = ["HD"]
 
     def __init__(self, warp_file=':memory:', config=("localhost", 1001)):
-
         super().__init__(warp_file)
         self.config = config
         self.HD = Process(target=self.handler, name='HANDLER_DB')
         self.HD.start()
+        time.sleep(0.1)
 
     def handler(self):
         while True:
