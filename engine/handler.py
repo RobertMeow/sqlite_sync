@@ -38,7 +38,3 @@ class HandlerDB(Driver, Listen):
                 break
             except:
                 traceback.print_exc()
-
-    def __del__(self):
-        print('KILL HANDLER DB')
-        self.HD.kill()
