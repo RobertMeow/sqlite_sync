@@ -11,7 +11,7 @@ from multiprocessing import Process
 class HandlerDB(Driver, Listen):
     __slots__ = ["HD"]
 
-    def __init__(self, warp_file=':memory:', config=("127.0.0.1", 10001)):
+    def __init__(self, warp_file=':memory:', config=("127.0.0.1", 1001)):
         super().__init__(warp_file)
         self.config = config
         self.HD = Process(target=self.handler, name='HANDLER_DB')
@@ -25,7 +25,6 @@ class HandlerDB(Driver, Listen):
             try:
                 for data in self.listen(self.config):
                     response = data[0]
-                    print(response)
                     if 'query' in response and 'type' in response:
                         match response['type']:
                             case 'save':
