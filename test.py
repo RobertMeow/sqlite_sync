@@ -4,7 +4,7 @@ import time
 
 
 def test(client: ClientDriver):
-    while True:
+    for _ in range(10):
         client.save("INSERT INTO test (name, age) VALUES ('Robert', 18)")
         time.sleep(0.1)
 
@@ -18,7 +18,9 @@ def main(config):
     for i in range(10):
         Thread(target=test, args=(client,)).start()
 
-    # db.HD.kill()
+    time.sleep(3)
+    db.kill()
+    print('ok!')
 
 
 if __name__ == '__main__':
